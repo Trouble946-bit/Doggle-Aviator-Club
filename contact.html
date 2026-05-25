@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Us - Bakers Den</title>
+  <title>Contact Us - Doggle Aviator Club</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="Bakers Den Logo" class="logo-img">
+        <img src="logo.png.png" alt="Doggle Aviator Club Logo" class="logo-img">
+        <span class="brand-name">Doggle Aviator Club</span>
       </a>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
@@ -22,7 +23,7 @@
   <section class="page-header">
     <div class="header-content">
       <h1>Get In Touch</h1>
-      <p>Let's create something sweet together</p>
+      <p>Let's plan your stay or dining experience</p>
     </div>
   </section>
 
@@ -41,7 +42,7 @@
           </div>
           <div class="info-box">
             <h3>✉️ Email</h3>
-            <p><a href="mailto:bakersden@gmail.com">bakersden@gmail.com</a></p>
+            <p><a href="mailto:doggleaviatorclub@gmail.com">doggleaviatorclub@gmail.com</a></p>
           </div>
           <div class="info-box">
             <h3>🕐 Hours</h3>
@@ -49,12 +50,12 @@
           </div>
           <div class="info-box">
             <h3>📝 Order Notice</h3>
-            <p>Custom cakes require 3-5 days advance notice.<br>Regular items available daily.</p>
+            <p>Lodge reservations and group dining requests are best placed 2-3 days in advance.</p>
           </div>
         </div>
 
         <form class="contact-form">
-          <h2>Place Your Order</h2>
+          <h2>Send Your Request</h2>
           <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required />
@@ -68,18 +69,18 @@
             <input type="email" id="email" name="email" />
           </div>
           <div class="form-group">
-            <label for="item">Item/Cake Design</label>
-            <input type="text" id="item" name="item" placeholder="e.g., Chocolate Delight Cake" required />
+            <label for="item">Room or Menu Item</label>
+            <input type="text" id="item" name="item" placeholder="e.g., Deluxe Room Reservation" required />
           </div>
           <div class="form-group">
             <label for="date">Needed By</label>
             <input type="date" id="date" name="date" required />
           </div>
           <div class="form-group">
-            <label for="message">Special Requirements / Custom Design Details</label>
-            <textarea id="message" name="message" rows="6" placeholder="Describe your dream cake or any special requirements..."></textarea>
+            <label for="message">Special Requirements</label>
+            <textarea id="message" name="message" rows="6" placeholder="Tell us your room preferences, event details, or food requests..."></textarea>
           </div>
-          <button type="submit" class="submit-button">Send Order via WhatsApp</button>
+          <button type="submit" class="submit-button">Send Request via WhatsApp</button>
         </form>
       </div>
     </div>
@@ -87,8 +88,8 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Bakers Den. All rights reserved.</p>
-      <p>Crafting sweet memories, one cake at a time 🎂</p>
+      <p>&copy; 2025 Doggle Aviator Club. All rights reserved.</p>
+      <p>Where comfort and great food come together.</p>
     </div>
   </footer>
 
@@ -105,7 +106,7 @@
         
         itemField.value = item;
         if (price && messageField.value === '') {
-          messageField.value = `I would like to order this item (MWK ${price}).\n\nPlease let me know about availability and delivery options.\n\nThank you!`;
+          messageField.value = `I would like to request this item/service (MWK ${price}).\n\nPlease let me know about availability and booking details.\n\nThank you!`;
         }
       }
 
@@ -127,7 +128,7 @@
           const phoneNumber = '265999958941'; // +265 (999) 958 941
           
           // Construct WhatsApp message
-          let whatsappMessage = `*NEW ORDER - Bakers Den*\n\n`;
+          let whatsappMessage = `*NEW REQUEST - Doggle Aviator Club*\n\n`;
           whatsappMessage += `*Customer:* ${name}\n`;
           whatsappMessage += `*Phone:* ${phone}\n`;
           if (email) whatsappMessage += `*Email:* ${email}\n`;

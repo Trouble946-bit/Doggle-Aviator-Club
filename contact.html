@@ -42,7 +42,7 @@
           </div>
           <div class="info-box">
             <h3>✉️ Email</h3>
-            <p><a href="mailto:info@dooglesmalawi.com">info@dooglesmalawi.com</a></p>
+            <p><a id="contact-email" href="#">Use the form below</a></p>
           </div>
           <div class="info-box">
             <h3>🕐 Hours</h3>
@@ -94,7 +94,16 @@
   </footer>
 
   <script>
-    // Pre-fill form from URL parameters
+    // Assemble email at runtime to prevent scraping
+      (function() {
+        var u = 'info';
+        var d = 'dooglesmalawi.com';
+        var el = document.getElementById('contact-email');
+        el.href = 'mailto:' + u + '@' + d;
+        el.textContent = u + '@' + d;
+      })();
+
+      // Pre-fill form from URL parameters
     document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const item = urlParams.get('item');

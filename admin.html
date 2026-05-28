@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Owner Dashboard - Doggle Aviator Club</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .admin-panel {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #fffaf0;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      border: 1px solid #e2d5c4;
+    }
+    .admin-panel h2 {
+      margin-bottom: 0.75rem;
+      color: #5A3F1A;
+    }
+    .admin-panel p {
+      color: #5A3F1A;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+    .admin-login,
+    .admin-editor {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .admin-login input,
+    .admin-login button,
+    .admin-editor input,
+    .admin-editor textarea,
+    .admin-editor select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid #d4c5b2;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .admin-login button,
+    .admin-editor button {
+      width: fit-content;
+      padding: 0.9rem 1.8rem;
+      background: #8B5A2B;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .admin-login button:hover,
+    .admin-editor button:hover {
+      background: #5A3F1A;
+    }
+    .admin-editor {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .menu-settings {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .menu-settings label {
+      color: #5A3F1A;
+      font-weight: 600;
+    }
+    .menu-item-list {
+      display: grid;
+      gap: 1rem;
+    }
+    .menu-item-card {
+      display: grid;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: #fff;
+      border: 1px solid #e2d5c4;
+      border-radius: 15px;
+    }
+    .menu-item-card h3 {
+      margin: 0;
+      color: #5A3F1A;
+    }
+    .menu-item-card p {
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+    }
+    .menu-item-card .menu-item-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .menu-item-actions button {
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .menu-item-actions .edit-button {
+      background: #ffd700;
+      color: #5A3F1A;
+    }
+    .menu-item-actions .delete-button {
+      background: #e07a5f;
+      color: white;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .security-note {
+      font-size: 0.95rem;
+      color: #5A3F1A;
+      background: #f7f0e5;
+      border-left: 4px solid #8B5A2B;
+      padding: 1rem 1rem 1rem 1.1rem;
+      border-radius: 10px;
+    }
+    @media (max-width: 768px) {
+      .admin-panel {
+        margin: 1.5rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="logo.png.png" alt="Doggle Aviator Club Logo" class="logo-img">
+        <span class="brand-name">Doggle Aviator Club</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="container">
+    <div class="admin-panel">
+      <h2>Owner Menu Editor</h2>
+      <p>Use this secure page to update the lodge and bar menu items. Changes are stored in this browser so the owner can preview updated offerings.</p>
+
+      <div id="login-section" class="admin-login">
+        <label for="admin-password">Owner Password</label>
+        <input id="admin-password" type="password" autocomplete="off" placeholder="Enter owner password" />
+        <button id="login-button" type="button">Log In</button>
+        <p class="security-note">The email address is hidden from public pages. Please use this page to maintain menu items safely.</p>
+      </div>
+
+      <div id="editor-section" class="admin-editor hidden">
+        <div class="menu-settings">
+          <label for="menu-type">Menu Type</label>
+          <select id="menu-type">
+            <option value="bar">Bar & Grill Menu</option>
+            <option value="lodge">Lodge Rooms</option>
+          </select>
+          <button id="reset-menu" type="button">Reset Selected Menu</button>
+          <button id="export-menu" type="button">Export Menu JSON</button>
+        </div>
+
+        <div class="security-note">Menu changes are saved locally in your browser. Open this page on the owner device to manage items safely.</div>
+
+        <div id="menu-list" class="menu-item-list"></div>
+
+        <form id="menu-form">
+          <h3 id="form-title">Add New Menu Item</h3>
+          <label for="item-title">Title</label>
+          <input id="item-title" type="text" placeholder="e.g. Classic Beef Burger" required />
+          <label for="item-description">Description</label>
+          <textarea id="item-description" rows="3" placeholder="Enter a short description" required></textarea>
+          <label for="item-price">Price</label>
+          <input id="item-price" type="text" placeholder="e.g. MWK 14,000" required />
+          <label for="item-image">Image URL</label>
+          <input id="item-image" type="url" placeholder="https://..." />
+          <div class="menu-item-actions">
+            <button id="save-item" type="button">Save Item</button>
+            <button id="cancel-edit" type="button" class="delete-button hidden">Cancel Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const ADMIN_PASSWORD = 'DOGGLEOWNER';
+    const storageKey = 'doggleMenuData';
+    const loginSection = document.getElementById('login-section');
+    const editorSection = document.getElementById('editor-section');
+    const loginButton = document.getElementById('login-button');
+    const passwordInput = document.getElementById('admin-password');
+    const menuTypeSelect = document.getElementById('menu-type');
+    const menuList = document.getElementById('menu-list');
+    const saveItemButton = document.getElementById('save-item');
+    const cancelEditButton = document.getElementById('cancel-edit');
+    const resetMenuButton = document.getElementById('reset-menu');
+    const exportMenuButton = document.getElementById('export-menu');
+    const formTitle = document.getElementById('form-title');
+    const itemTitleInput = document.getElementById('item-title');
+    const itemDescriptionInput = document.getElementById('item-description');
+    const itemPriceInput = document.getElementById('item-price');
+    const itemImageInput = document.getElementById('item-image');
+
+    let currentMenuType = 'bar';
+    let editingIndex = null;
+
+    const defaultMenuData = {
+      bar: [
+        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop' },
+        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop' },
+        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop' }
+      ],
+      lodge: [
+        { title: 'Standard Room', description: 'Clean and cozy room with essential amenities', price: 'MWK 45,000 / night', image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=400&fit=crop' },
+        { title: 'Deluxe Room', description: 'Spacious room with upgraded comfort and views', price: 'MWK 60,000 / night', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400&h=400&fit=crop' },
+        { title: 'Executive Suite', description: 'Premium suite ideal for business or leisure stays', price: 'MWK 90,000 / night', image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&h=400&fit=crop' }
+      ]
+    };
+
+    function getStoredMenuData() {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return JSON.parse(JSON.stringify(defaultMenuData));
+      try {
+        const value = JSON.parse(raw);
+        return { bar: value.bar || [], lodge: value.lodge || [] };
+      } catch (error) {
+        return JSON.parse(JSON.stringify(defaultMenuData));
+      }
+    }
+
+    function saveMenuData(data) {
+      localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    function getCurrentItems() {
+      const data = getStoredMenuData();
+      return data[currentMenuType] || [];
+    }
+
+    function renderMenuItems() {
+      const items = getCurrentItems();
+      menuList.innerHTML = items.map((item, index) => `
+        <div class="menu-item-card">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <p><strong>${item.price}</strong></p>
+          ${item.image ? `<p><em>Image URL:</em> ${item.image}</p>` : ''}
+          <div class="menu-item-actions">
+            <button class="edit-button" data-index="${index}">Edit</button>
+            <button class="delete-button" data-index="${index}">Delete</button>
+          </div>
+        </div>
+      `).join('');
+      document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', event => {
+          const index = Number(event.target.dataset.index);
+          startEditItem(index);
+        });
+      });
+      document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', event => {
+          const index = Number(event.target.dataset.index);
+          deleteMenuItem(index);
+        });
+      });
+    }
+
+    function startEditItem(index) {
+      const items = getCurrentItems();
+      const item = items[index];
+      if (!item) return;
+      editingIndex = index;
+      formTitle.textContent = 'Edit Menu Item';
+      itemTitleInput.value = item.title;
+      itemDescriptionInput.value = item.description;
+      itemPriceInput.value = item.price;
+      itemImageInput.value = item.image || '';
+      cancelEditButton.classList.remove('hidden');
+    }
+
+    function clearForm() {
+      editingIndex = null;
+      formTitle.textContent = 'Add New Menu Item';
+      itemTitleInput.value = '';
+      itemDescriptionInput.value = '';
+      itemPriceInput.value = '';
+      itemImageInput.value = '';
+      cancelEditButton.classList.add('hidden');
+    }
+
+    function saveItem() {
+      const title = itemTitleInput.value.trim();
+      const description = itemDescriptionInput.value.trim();
+      const price = itemPriceInput.value.trim();
+      const image = itemImageInput.value.trim();
+      if (!title || !description || !price) {
+        alert('Please complete all required fields.');
+        return;
+      }
+      const data = getStoredMenuData();
+      const items = data[currentMenuType];
+      const newItem = { title, description, price, image };
+      if (editingIndex !== null) {
+        items[editingIndex] = newItem;
+      } else {
+        items.push(newItem);
+      }
+      saveMenuData(data);
+      renderMenuItems();
+      clearForm();
+    }
+
+    function deleteMenuItem(index) {
+      const data = getStoredMenuData();
+      data[currentMenuType].splice(index, 1);
+      saveMenuData(data);
+      renderMenuItems();
+    }
+
+    function resetMenu() {
+      const data = getStoredMenuData();
+      data[currentMenuType] = JSON.parse(JSON.stringify(defaultMenuData[currentMenuType]));
+      saveMenuData(data);
+      renderMenuItems();
+      clearForm();
+    }
+
+    function exportMenu() {
+      const data = getStoredMenuData();
+      const textArea = document.createElement('textarea');
+      textArea.value = JSON.stringify(data, null, 2);
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Menu JSON copied to clipboard.');
+    }
+
+    function showEditor() {
+      loginSection.classList.add('hidden');
+      editorSection.classList.remove('hidden');
+      renderMenuItems();
+    }
+
+    loginButton.addEventListener('click', () => {
+      if (passwordInput.value === ADMIN_PASSWORD) {
+        showEditor();
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    });
+
+    menuTypeSelect.addEventListener('change', () => {
+      currentMenuType = menuTypeSelect.value;
+      clearForm();
+      renderMenuItems();
+    });
+
+    saveItemButton.addEventListener('click', saveItem);
+    cancelEditButton.addEventListener('click', clearForm);
+    resetMenuButton.addEventListener('click', () => {
+      if (confirm('Reset this menu to default items?')) {
+        resetMenu();
+      }
+    });
+    exportMenuButton.addEventListener('click', exportMenu);
+  </script>
+</body>
+</html>

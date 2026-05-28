@@ -33,7 +33,7 @@ body {
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #FF69B4;
+  color: #5A3F1A;
   text-decoration: none;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   display: flex;
@@ -45,7 +45,7 @@ body {
   font-family: Algerian, Georgia, serif;
   font-size: 2rem;
   font-weight: bold;
-  color: #FF1493;
+  color: #8B5A2B;
   letter-spacing: 2px;
 }
 
@@ -66,7 +66,7 @@ body {
 }
 
 .nav-menu a {
-  color: #FF69B4;
+  color: #5A3F1A;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s;
@@ -75,8 +75,8 @@ body {
 }
 
 .nav-menu a:hover {
-  background: #FFF0F5;
-  color: #FF1493;
+  background: #F5EFE0;
+  color: #8B5A2B;
   transform: translateY(-2px);
 }
 
@@ -136,7 +136,7 @@ body {
   display: inline-block;
   padding: 1rem 2.5rem;
   background: #FFD700;
-  color: #FF1493;
+  color: #5A3F1A;
   text-decoration: none;
   border-radius: 50px;
   font-weight: bold;
@@ -153,7 +153,7 @@ body {
 
 .cta-button.secondary {
   background: white;
-  color: #FF69B4;
+  color: #5A3F1A;
 }
 
 .cta-button.secondary:hover {
@@ -169,7 +169,7 @@ body {
 
 /* Sections */
 .featured {
-  background: #FFF0F5;
+  background: #F4E7D8;
 }
 
 /* Category Cards */
@@ -218,7 +218,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(255, 105, 180, 0.95), transparent);
+  background: linear-gradient(to top, rgba(90, 63, 26, 0.95), transparent);
   padding: 2rem;
   color: white;
   transform: translateY(50%);
@@ -254,7 +254,7 @@ body {
 
 .category-info h4 {
   font-size: 1.8rem;
-  color: #FF69B4;
+  color: #5A3F1A;
   margin-bottom: 1rem;
 }
 
@@ -267,7 +267,7 @@ body {
 
 .price-range {
   display: inline-block;
-  background: #FF69B4;
+  background: #8B5A2B;
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 25px;
@@ -281,16 +281,16 @@ body {
   align-items: center;
   margin: 3rem 0 2rem 0;
   padding-bottom: 1rem;
-  border-bottom: 3px solid #FF69B4;
+  border-bottom: 3px solid #8B5A2B;
 }
 
 .section-header h3 {
   font-size: 2rem;
-  color: #FF69B4;
+  color: #8B5A2B;
 }
 
 .view-all {
-  color: #FF69B4;
+  color: #8B5A2B;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -298,13 +298,13 @@ body {
 }
 
 .view-all:hover {
-  color: #FF1493;
+  color: #5A3F1A;
 }
 
 h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #FF69B4;
+  color: #5A3F1A;
   margin-bottom: 3rem;
 }
 
@@ -337,7 +337,7 @@ h2 {
 }
 
 .picture-box h3, .picture-box h4 {
-  color: #FF69B4;
+  color: #5A3F1A;
   margin: 1rem 0 0.5rem 0;
   font-size: 1.5rem;
 }
@@ -360,7 +360,7 @@ h2 {
   display: inline-block;
   margin: 1rem 0 1.5rem 0;
   padding: 0.7rem 2rem;
-  background: #FF69B4;
+  background: #8B5A2B;
   color: white;
   text-decoration: none;
   border-radius: 25px;
@@ -369,7 +369,7 @@ h2 {
 }
 
 .order-btn:hover {
-  background: #FF1493;
+  background: #5A3F1A;
   transform: scale(1.05);
 }
 
@@ -387,7 +387,7 @@ h2 {
 .feature-box {
   text-align: center;
   padding: 2rem;
-  background: #FFF0F5;
+  background: #F4E7D8;
   border-radius: 15px;
   transition: all 0.3s;
 }
@@ -404,7 +404,7 @@ h2 {
 }
 
 .feature-box h3 {
-  color: #FF69B4;
+  color: #5A3F1A;
   margin-bottom: 0.5rem;
 }
 
@@ -430,7 +430,7 @@ h2 {
 
 /* Gallery Section */
 .gallery-section {
-  background: #FFF0F5;
+  background: #F4E7D8;
 }
 
 .custom-order {
@@ -443,7 +443,7 @@ h2 {
 }
 
 .custom-order h2 {
-  color: #FF69B4;
+  color: #5A3F1A;
   margin-bottom: 1rem;
 }
 
@@ -455,7 +455,7 @@ h2 {
 
 /* Contact Section */
 .contact-section {
-  background: #FFF0F5;
+  background: #F4E7D8;
   padding: 4rem 2rem;
 }
 
@@ -481,7 +481,7 @@ h2 {
 }
 
 .info-box h3 {
-  color: #FF69B4;
+  color: #5A3F1A;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
 }
@@ -491,7 +491,7 @@ h2 {
 }
 
 .info-box a {
-  color: #FF69B4;
+  color: #5A3F1A;
   text-decoration: none;
 }
 
@@ -519,7 +519,7 @@ h2 {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #FF69B4;
+  color: #5A3F1A;
   font-weight: 600;
 }
 
@@ -537,13 +537,13 @@ h2 {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #FF69B4;
+  border-color: #8B5A2B;
 }
 
 .submit-button {
   width: 100%;
   padding: 1rem;
-  background: #FF69B4;
+  background: #8B5A2B;
   color: white;
   border: none;
   border-radius: 8px;
@@ -554,7 +554,7 @@ h2 {
 }
 
 .submit-button:hover {
-  background: #FF1493;
+  background: #5A3F1A;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }

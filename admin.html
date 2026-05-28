@@ -6,128 +6,252 @@
   <title>Owner Dashboard - Doggle Aviator Club</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .admin-panel {
-      max-width: 1100px;
-      margin: 3rem auto;
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 2rem;
-      background: #fffaf0;
+    }
+    
+    #login-section {
+      max-width: 400px;
+      margin: 4rem auto;
+      padding: 3rem 2rem;
+      background: #F4E7D8;
       border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-      border: 1px solid #e2d5c4;
+      text-align: center;
     }
-    .admin-panel h2 {
-      margin-bottom: 0.75rem;
-      color: #5A3F1A;
-    }
-    .admin-panel p {
-      color: #5A3F1A;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-    }
-    .admin-login,
-    .admin-editor {
-      display: grid;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .admin-login input,
-    .admin-login button,
-    .admin-editor input,
-    .admin-editor textarea,
-    .admin-editor select {
+    
+    #login-section input {
       width: 100%;
-      padding: 0.85rem 1rem;
+      padding: 0.85rem;
+      margin-bottom: 1rem;
       border: 1px solid #d4c5b2;
       border-radius: 10px;
       font-size: 1rem;
-      font-family: inherit;
     }
-    .admin-login button,
-    .admin-editor button {
-      width: fit-content;
-      padding: 0.9rem 1.8rem;
+    
+    #login-button {
+      width: 100%;
+      padding: 0.9rem;
+      background: #8B5A2B;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    #login-button:hover {
+      background: #5A3F1A;
+    }
+    
+    #editor-section h2 {
+      color: #5A3F1A;
+      margin-bottom: 1rem;
+    }
+    
+    .editor-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .editor-controls select {
+      padding: 0.85rem 1rem;
+      border: 1px solid #d4c5b2;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .editor-controls button {
+      padding: 0.85rem 1.5rem;
       background: #8B5A2B;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: 600;
+      transition: background 0.3s;
     }
-    .admin-login button:hover,
-    .admin-editor button:hover {
+    
+    .editor-controls button:hover {
       background: #5A3F1A;
     }
-    .admin-editor {
-      display: grid;
-      gap: 1.5rem;
-    }
-    .menu-settings {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .menu-settings label {
+    
+    .security-note {
+      background: #f7f0e5;
+      border-left: 4px solid #8B5A2B;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
       color: #5A3F1A;
-      font-weight: 600;
     }
-    .menu-item-list {
+    
+    .menu-gallery {
       display: grid;
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
-    .menu-item-card {
-      display: grid;
-      gap: 0.75rem;
-      padding: 1rem 1.25rem;
-      background: #fff;
-      border: 1px solid #e2d5c4;
+    
+    .menu-gallery-item {
+      background: white;
       border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
     }
-    .menu-item-card h3 {
-      margin: 0;
+    
+    .menu-gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .menu-gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .menu-item-content {
+      padding: 1.5rem;
+    }
+    
+    .menu-item-content h3 {
+      margin: 0 0 0.5rem 0;
       color: #5A3F1A;
+      font-size: 1.5rem;
     }
-    .menu-item-card p {
-      margin: 0;
+    
+    .menu-item-content p {
+      margin: 0 0 1rem 0;
       color: #666;
       line-height: 1.6;
+      font-size: 0.95rem;
     }
-    .menu-item-card .menu-item-actions {
+    
+    .menu-item-price {
+      font-weight: 600;
+      color: #8B5A2B;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .gallery-buttons {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
     }
-    .menu-item-actions button {
-      padding: 0.65rem 1rem;
-      border-radius: 10px;
+    
+    .gallery-buttons button {
+      padding: 0.7rem 1.2rem;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
     }
-    .menu-item-actions .edit-button {
-      background: #ffd700;
+    
+    .edit-btn {
+      background: #FFD700;
       color: #5A3F1A;
     }
-    .menu-item-actions .delete-button {
+    
+    .edit-btn:hover {
+      background: #FFA500;
+    }
+    
+    .delete-btn {
       background: #e07a5f;
       color: white;
     }
+    
+    .delete-btn:hover {
+      background: #d46050;
+    }
+    
+    .form-section {
+      background: #F4E7D8;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    
+    .form-section h3 {
+      color: #5A3F1A;
+      margin-top: 0;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #5A3F1A;
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem;
+      border: 1px solid #d4c5b2;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .form-buttons button {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .save-btn {
+      background: #8B5A2B;
+      color: white;
+    }
+    
+    .save-btn:hover {
+      background: #5A3F1A;
+    }
+    
+    .cancel-btn {
+      background: #ddd;
+      color: #333;
+    }
+    
+    .cancel-btn:hover {
+      background: #ccc;
+    }
+    
     .hidden {
       display: none !important;
-    }
-    .security-note {
-      font-size: 0.95rem;
-      color: #5A3F1A;
-      background: #f7f0e5;
-      border-left: 4px solid #8B5A2B;
-      padding: 1rem 1rem 1rem 1.1rem;
-      border-radius: 10px;
-    }
-    @media (max-width: 768px) {
-      .admin-panel {
-        margin: 1.5rem;
-        padding: 1.5rem;
-      }
     }
   </style>
 </head>
@@ -145,70 +269,84 @@
     </div>
   </nav>
 
-  <section class="container">
-    <div class="admin-panel">
-      <h2>Owner Menu Editor</h2>
-      <p>Use this secure page to update the lodge and bar menu items. Changes are stored in this browser so the owner can preview updated offerings.</p>
+  <div class="admin-container">
+    <div id="login-section">
+      <h2>Owner Portal</h2>
+      <p>Enter your password to manage menu items</p>
+      <input id="admin-password" type="password" placeholder="Enter password" autocomplete="off" />
+      <button id="login-button" type="button">Log In</button>
+    </div>
 
-      <div id="login-section" class="admin-login">
-        <label for="admin-password">Owner Password</label>
-        <input id="admin-password" type="password" autocomplete="off" placeholder="Enter owner password" />
-        <button id="login-button" type="button">Log In</button>
-        <p class="security-note">The email address is hidden from public pages. Please use this page to maintain menu items safely.</p>
+    <div id="editor-section" class="hidden">
+      <h2>Menu Manager</h2>
+      
+      <div class="editor-controls">
+        <label for="menu-type">Select Menu:</label>
+        <select id="menu-type">
+          <option value="bar">Bar & Grill Menu</option>
+          <option value="lodge">Lodge Rooms</option>
+        </select>
+        <button id="add-item-btn" type="button">+ Add New Item</button>
+        <button id="reset-menu-btn" type="button">Reset Menu</button>
+        <button id="export-menu-btn" type="button">Export JSON</button>
       </div>
 
-      <div id="editor-section" class="admin-editor hidden">
-        <div class="menu-settings">
-          <label for="menu-type">Menu Type</label>
-          <select id="menu-type">
-            <option value="bar">Bar & Grill Menu</option>
-            <option value="lodge">Lodge Rooms</option>
-          </select>
-          <button id="reset-menu" type="button">Reset Selected Menu</button>
-          <button id="export-menu" type="button">Export Menu JSON</button>
-        </div>
+      <div class="security-note">
+        Menu changes are saved in your browser. Make sure to use the same device and browser to view your changes on the public site.
+      </div>
 
-        <div class="security-note">Menu changes are saved locally in your browser. Open this page on the owner device to manage items safely.</div>
-
-        <div id="menu-list" class="menu-item-list"></div>
-
+      <div class="form-section hidden" id="form-section">
+        <h3 id="form-title">Add New Menu Item</h3>
         <form id="menu-form">
-          <h3 id="form-title">Add New Menu Item</h3>
-          <label for="item-title">Title</label>
-          <input id="item-title" type="text" placeholder="e.g. Classic Beef Burger" required />
-          <label for="item-description">Description</label>
-          <textarea id="item-description" rows="3" placeholder="Enter a short description" required></textarea>
-          <label for="item-price">Price</label>
-          <input id="item-price" type="text" placeholder="e.g. MWK 14,000" required />
-          <label for="item-image">Image URL</label>
-          <input id="item-image" type="url" placeholder="https://..." />
-          <div class="menu-item-actions">
-            <button id="save-item" type="button">Save Item</button>
-            <button id="cancel-edit" type="button" class="delete-button hidden">Cancel Edit</button>
+          <div class="form-group">
+            <label for="item-title">Title *</label>
+            <input id="item-title" type="text" placeholder="e.g. Classic Beef Burger" required />
+          </div>
+          <div class="form-group">
+            <label for="item-description">Description *</label>
+            <textarea id="item-description" placeholder="e.g. Served with fries and house sauce" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="item-price">Price *</label>
+            <input id="item-price" type="text" placeholder="e.g. MWK 14,000" required />
+          </div>
+          <div class="form-group">
+            <label for="item-image">Image URL</label>
+            <input id="item-image" type="url" placeholder="https://..." />
+          </div>
+          <div class="form-buttons">
+            <button id="save-item-btn" type="button" class="save-btn">Save Item</button>
+            <button id="cancel-edit-btn" type="button" class="cancel-btn hidden">Cancel</button>
           </div>
         </form>
       </div>
+
+      <div class="menu-gallery" id="menu-gallery"></div>
     </div>
-  </section>
+  </div>
 
   <script>
     const ADMIN_PASSWORD = 'DOGGLEOWNER';
     const storageKey = 'doggleMenuData';
+    
     const loginSection = document.getElementById('login-section');
     const editorSection = document.getElementById('editor-section');
     const loginButton = document.getElementById('login-button');
     const passwordInput = document.getElementById('admin-password');
     const menuTypeSelect = document.getElementById('menu-type');
-    const menuList = document.getElementById('menu-list');
-    const saveItemButton = document.getElementById('save-item');
-    const cancelEditButton = document.getElementById('cancel-edit');
-    const resetMenuButton = document.getElementById('reset-menu');
-    const exportMenuButton = document.getElementById('export-menu');
+    const menuGallery = document.getElementById('menu-gallery');
+    const formSection = document.getElementById('form-section');
     const formTitle = document.getElementById('form-title');
+    const menuForm = document.getElementById('menu-form');
     const itemTitleInput = document.getElementById('item-title');
     const itemDescriptionInput = document.getElementById('item-description');
     const itemPriceInput = document.getElementById('item-price');
     const itemImageInput = document.getElementById('item-image');
+    const saveItemBtn = document.getElementById('save-item-btn');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    const addItemBtn = document.getElementById('add-item-btn');
+    const resetMenuBtn = document.getElementById('reset-menu-btn');
+    const exportMenuBtn = document.getElementById('export-menu-btn');
 
     let currentMenuType = 'bar';
     let editingIndex = null;
@@ -246,35 +384,52 @@
       return data[currentMenuType] || [];
     }
 
-    function renderMenuItems() {
+    function clearForm() {
+      editingIndex = null;
+      formTitle.textContent = 'Add New Menu Item';
+      itemTitleInput.value = '';
+      itemDescriptionInput.value = '';
+      itemPriceInput.value = '';
+      itemImageInput.value = '';
+      cancelEditBtn.classList.add('hidden');
+      formSection.classList.add('hidden');
+    }
+
+    function renderMenuGallery() {
       const items = getCurrentItems();
-      menuList.innerHTML = items.map((item, index) => `
-        <div class="menu-item-card">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <p><strong>${item.price}</strong></p>
-          ${item.image ? `<p><em>Image URL:</em> ${item.image}</p>` : ''}
-          <div class="menu-item-actions">
-            <button class="edit-button" data-index="${index}">Edit</button>
-            <button class="delete-button" data-index="${index}">Delete</button>
+      menuGallery.innerHTML = items.map((item, index) => `
+        <div class="menu-gallery-item">
+          <img src="${item.image || 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop'}" alt="${item.title}" />
+          <div class="menu-item-content">
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <div class="menu-item-price">${item.price}</div>
+            <div class="gallery-buttons">
+              <button type="button" class="edit-btn" data-index="${index}">Edit</button>
+              <button type="button" class="delete-btn" data-index="${index}">Delete</button>
+            </div>
           </div>
         </div>
       `).join('');
-      document.querySelectorAll('.edit-button').forEach(button => {
-        button.addEventListener('click', event => {
-          const index = Number(event.target.dataset.index);
-          startEditItem(index);
+
+      document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'));
+          editItem(index);
         });
       });
-      document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', event => {
-          const index = Number(event.target.dataset.index);
-          deleteMenuItem(index);
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'));
+          if (confirm('Delete this item?')) {
+            deleteItem(index);
+          }
         });
       });
     }
 
-    function startEditItem(index) {
+    function editItem(index) {
       const items = getCurrentItems();
       const item = items[index];
       if (!item) return;
@@ -284,17 +439,16 @@
       itemDescriptionInput.value = item.description;
       itemPriceInput.value = item.price;
       itemImageInput.value = item.image || '';
-      cancelEditButton.classList.remove('hidden');
+      cancelEditBtn.classList.remove('hidden');
+      formSection.classList.remove('hidden');
+      formSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function clearForm() {
-      editingIndex = null;
-      formTitle.textContent = 'Add New Menu Item';
-      itemTitleInput.value = '';
-      itemDescriptionInput.value = '';
-      itemPriceInput.value = '';
-      itemImageInput.value = '';
-      cancelEditButton.classList.add('hidden');
+    function deleteItem(index) {
+      const data = getStoredMenuData();
+      data[currentMenuType].splice(index, 1);
+      saveMenuData(data);
+      renderMenuGallery();
     }
 
     function saveItem() {
@@ -302,77 +456,93 @@
       const description = itemDescriptionInput.value.trim();
       const price = itemPriceInput.value.trim();
       const image = itemImageInput.value.trim();
+
       if (!title || !description || !price) {
-        alert('Please complete all required fields.');
+        alert('Please fill in all required fields (Title, Description, Price)');
         return;
       }
-      const data = getStoredMenuData();
-      const items = data[currentMenuType];
-      const newItem = { title, description, price, image };
-      if (editingIndex !== null) {
-        items[editingIndex] = newItem;
-      } else {
-        items.push(newItem);
-      }
-      saveMenuData(data);
-      renderMenuItems();
-      clearForm();
-    }
 
-    function deleteMenuItem(index) {
       const data = getStoredMenuData();
-      data[currentMenuType].splice(index, 1);
+      const newItem = { title, description, price, image };
+
+      if (editingIndex !== null) {
+        data[currentMenuType][editingIndex] = newItem;
+      } else {
+        data[currentMenuType].push(newItem);
+      }
+
       saveMenuData(data);
-      renderMenuItems();
+      renderMenuGallery();
+      clearForm();
+      alert(editingIndex !== null ? 'Item updated!' : 'Item added!');
     }
 
     function resetMenu() {
-      const data = getStoredMenuData();
-      data[currentMenuType] = JSON.parse(JSON.stringify(defaultMenuData[currentMenuType]));
-      saveMenuData(data);
-      renderMenuItems();
-      clearForm();
+      if (confirm('Reset this menu to default items? This cannot be undone.')) {
+        const data = getStoredMenuData();
+        data[currentMenuType] = JSON.parse(JSON.stringify(defaultMenuData[currentMenuType]));
+        saveMenuData(data);
+        renderMenuGallery();
+        clearForm();
+        alert('Menu reset to defaults.');
+      }
     }
 
     function exportMenu() {
       const data = getStoredMenuData();
-      const textArea = document.createElement('textarea');
-      textArea.value = JSON.stringify(data, null, 2);
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      alert('Menu JSON copied to clipboard.');
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'doggle-menu-backup.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     function showEditor() {
       loginSection.classList.add('hidden');
       editorSection.classList.remove('hidden');
-      renderMenuItems();
+      renderMenuGallery();
     }
 
     loginButton.addEventListener('click', () => {
       if (passwordInput.value === ADMIN_PASSWORD) {
         showEditor();
       } else {
-        alert('Incorrect password. Please try again.');
+        alert('Incorrect password.');
+        passwordInput.value = '';
       }
+    });
+
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginButton.click();
     });
 
     menuTypeSelect.addEventListener('change', () => {
       currentMenuType = menuTypeSelect.value;
       clearForm();
-      renderMenuItems();
+      renderMenuGallery();
     });
 
-    saveItemButton.addEventListener('click', saveItem);
-    cancelEditButton.addEventListener('click', clearForm);
-    resetMenuButton.addEventListener('click', () => {
-      if (confirm('Reset this menu to default items?')) {
-        resetMenu();
-      }
+    addItemBtn.addEventListener('click', () => {
+      clearForm();
+      formSection.classList.remove('hidden');
+      itemTitleInput.focus();
     });
-    exportMenuButton.addEventListener('click', exportMenu);
+
+    saveItemBtn.addEventListener('click', saveItem);
+    cancelEditBtn.addEventListener('click', clearForm);
+    resetMenuBtn.addEventListener('click', resetMenu);
+    exportMenuBtn.addEventListener('click', exportMenu);
   </script>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Doggle Aviator Club. All rights reserved.</p>
+      <p>Where comfort and great food come together.</p>
+    </div>
+  </footer>
 </body>
 </html>

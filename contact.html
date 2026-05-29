@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Us - Doggle Aviator Club</title>
+  <title>Contact Us - Doogle Aviation Club</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .form-buttons-group {
@@ -51,8 +51,8 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="Doggle Aviator Club Logo" class="logo-img">
-        <span class="brand-name">Doggle Aviator Club</span>
+        <img src="logo.png.png" alt="Doogle Aviation Club Logo" class="logo-img">
+        <span class="brand-name">Doogle Aviation Club</span>
       </a>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
@@ -185,7 +185,7 @@
           if (!validateForm(data)) return;
           
           const phoneNumber = '265882909864';
-          let whatsappMessage = `*NEW REQUEST - Doggle Aviator Club*\n\n`;
+          let whatsappMessage = `*NEW REQUEST - Doogle Aviation Club*\n\n`;
           whatsappMessage += `*Customer:* ${data.name}\n`;
           whatsappMessage += `*Phone:* ${data.phone}\n`;
           if (data.email) whatsappMessage += `*Email:* ${data.email}\n`;
@@ -215,7 +215,7 @@
           emailBody += `\nSpecial Requirements:\n${data.message || 'None'}`;
           
           const recipientEmail = 'info@dooglesmalawi.com';
-          const subject = `New Request from ${data.name} - Doggle Aviator Club`;
+          const subject = `New Request from ${data.name} - Doogle Aviation Club`;
           const encodedBody = encodeURIComponent(emailBody);
           const encodedSubject = encodeURIComponent(subject);
           

@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Us - Doggle Aviator Club</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .form-buttons-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-buttons-group .submit-button {
+      width: 100%;
+      padding: 1rem;
+      background: #8B5A2B;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-buttons-group .submit-button:hover {
+      background: #5A3F1A;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .form-buttons-group .email-style {
+      background: #5A7A9F;
+    }
+
+    .form-buttons-group .email-style:hover {
+      background: #3f5570;
+    }
+
+    @media (max-width: 768px) {
+      .form-buttons-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -80,7 +121,10 @@
             <label for="message">Special Requirements</label>
             <textarea id="message" name="message" rows="6" placeholder="Tell us your room preferences, event details, or food requests..."></textarea>
           </div>
-          <button type="submit" class="submit-button">Send Request via WhatsApp</button>
+          <div class="form-buttons-group">
+            <button type="button" id="whatsapp-btn" class="submit-button">Send via WhatsApp</button>
+            <button type="button" id="email-btn" class="submit-button email-style">Send via Email</button>
+          </div>
         </form>
       </div>
     </div>
@@ -111,40 +155,72 @@
         }
       }
 
-      // WhatsApp redirect on form submission
-      const contactForm = document.querySelector('.contact-form');
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+      // Get form values
+      function getFormData() {
+        return {
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          email: document.getElementById('email').value,
+          item: document.getElementById('item').value,
+          date: document.getElementById('date').value,
+          message: document.getElementById('message').value
+        };
+      }
+
+      // Validate form
+      function validateForm(data) {
+        if (!data.name || !data.phone || !data.item || !data.date) {
+          alert('Please fill in all required fields.');
+          return false;
+        }
+        return true;
+      }
+
+      // Handle WhatsApp submission
+      const whatsappBtn = document.getElementById('whatsapp-btn');
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function(e) {
           e.preventDefault();
+          const data = getFormData();
+          if (!validateForm(data)) return;
           
-          // Get form values
-          const name = document.getElementById('name').value;
-          const phone = document.getElementById('phone').value;
-          const email = document.getElementById('email').value;
-          const item = document.getElementById('item').value;
-          const date = document.getElementById('date').value;
-          const message = document.getElementById('message').value;
-          
-          // Format phone number for WhatsApp
-          const phoneNumber = '265882909864'; // +265 882 909 864
-          
-          // Construct WhatsApp message
+          const phoneNumber = '265882909864';
           let whatsappMessage = `*NEW REQUEST - Doggle Aviator Club*\n\n`;
-          whatsappMessage += `*Customer:* ${name}\n`;
-          whatsappMessage += `*Phone:* ${phone}\n`;
-          if (email) whatsappMessage += `*Email:* ${email}\n`;
-          whatsappMessage += `*Item:* ${item}\n`;
-          whatsappMessage += `*Needed By:* ${date}\n\n`;
-          if (message) whatsappMessage += `*Special Requirements:*\n${message}`;
+          whatsappMessage += `*Customer:* ${data.name}\n`;
+          whatsappMessage += `*Phone:* ${data.phone}\n`;
+          if (data.email) whatsappMessage += `*Email:* ${data.email}\n`;
+          whatsappMessage += `*Item:* ${data.item}\n`;
+          whatsappMessage += `*Needed By:* ${data.date}\n\n`;
+          if (data.message) whatsappMessage += `*Special Requirements:*\n${data.message}`;
           
-          // Encode message for URL
           const encodedMessage = encodeURIComponent(whatsappMessage);
-          
-          // Create WhatsApp URL
           const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-          
-          // Open WhatsApp in new tab
           window.open(whatsappURL, '_blank');
+        });
+      }
+
+      // Handle Email submission
+      const emailBtn = document.getElementById('email-btn');
+      if (emailBtn) {
+        emailBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const data = getFormData();
+          if (!validateForm(data)) return;
+          
+          let emailBody = `Customer Name: ${data.name}\n`;
+          emailBody += `Phone: ${data.phone}\n`;
+          if (data.email) emailBody += `Email: ${data.email}\n`;
+          emailBody += `Item/Room: ${data.item}\n`;
+          emailBody += `Needed By: ${data.date}\n`;
+          emailBody += `\nSpecial Requirements:\n${data.message || 'None'}`;
+          
+          const recipientEmail = 'info@dooglesmalawi.com';
+          const subject = `New Request from ${data.name} - Doggle Aviator Club`;
+          const encodedBody = encodeURIComponent(emailBody);
+          const encodedSubject = encodeURIComponent(subject);
+          
+          const mailtoURL = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+          window.location.href = mailtoURL;
         });
       }
 

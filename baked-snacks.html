@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bar & Grill - Doogle Aviation Club</title>
+  <title>Bar & Restaurant - doogle Aviator Club</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-header {
@@ -51,13 +51,13 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="Doogle Aviation Club Logo" class="logo-img">
-        <span class="brand-name">Doogle Aviation Club</span>
+        <img src="logo.png.png" alt="doogle Aviator Club Logo" class="logo-img">
+        <span class="brand-name">doogle Aviator Club</span>
       </a>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="cakes.html">Lodge</a></li>
-        <li><a href="baked-snacks.html">Bar & Grill</a></li>
+        <li><a href="baked-snacks.html">Bar & Restaurant</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -65,12 +65,12 @@
 
   <section class="page-header">
     <div class="slideshow-bg">
-      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600&h=600&fit=crop');"></div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1600&h=600&fit=crop');"></div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=1600&h=600&fit=crop');"></div>
+      <div class="slide active" style="background-image: url('Bar.jpeg');"></div>
+      <div class="slide" style="background-image: url('Bar.jpeg');"></div>
+      <div class="slide" style="background-image: url('Bar.jpeg');"></div>
     </div>
     <div class="header-content">
-      <h1>Bar & Grill</h1>
+      <h1>Bar & Restaurant</h1>
       <p>Freshly prepared favorites and signature drinks</p>
     </div>
   </section>
@@ -89,7 +89,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Doogle Aviation Club. All rights reserved.</p>
+      <p>&copy; 2025 doogle Aviator Club. All rights reserved.</p>
       <p>Where comfort and great food come together.</p>
       <p style="margin-top: 1rem; opacity: 0.8;"><a href="admin.html" style="color: inherit; text-decoration: underline;">Owner Portal</a></p>
     </div>
@@ -130,8 +130,7 @@
           <img src="${item.image || 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop'}" alt="${item.alt || item.title}" />
           <h3>${item.title}</h3>
           <p>${item.description}</p>
-          <span class="price">${item.price}</span>
-          <a href="contact.html?item=${encodeURIComponent(item.title)}&price=${encodeURIComponent(item.price.replace(/[^0-9]/g, ''))}" class="order-btn">Order Now</a>
+          <a href="contact.html?item=${encodeURIComponent(item.title)}" class="order-btn">Order Now</a>
         </div>
       `).join('');
     }

@@ -1,44 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="220" height="90" viewBox="0 0 220 90">
   <defs>
     <style>
-      .script-text { font-family: 'Brush Script MT', cursive; font-weight: normal; }
-      .den-text { font-family: 'Georgia', serif; font-weight: bold; letter-spacing: 2px; }
+      .brand-text { font-family: 'Georgia', serif; font-weight: bold; letter-spacing: 1px; }
+      .club-text { font-family: 'Georgia', serif; font-weight: 600; letter-spacing: 2px; }
     </style>
   </defs>
   
-  <!-- Background decorative circle -->
-  <circle cx="25" cy="45" r="20" fill="#FFD700" opacity="0.3"/>
-  <circle cx="195" cy="45" r="20" fill="#FFD700" opacity="0.3"/>
+  <!-- Background circle -->
+  <circle cx="30" cy="45" r="22" fill="#F4E7D8" stroke="#8B5A2B" stroke-width="1.5" opacity="0.9"/>
   
-  <!-- Small cupcake icon left -->
-  <g transform="translate(25, 45)">
-    <path d="M -8,2 L -5,8 L 5,8 L 8,2 Z" fill="#A0522D"/>
-    <circle cx="-3" cy="0" r="3" fill="#FFC0CB"/>
-    <circle cx="3" cy="0" r="3" fill="#FFC0CB"/>
-    <circle cx="0" cy="-2" r="3" fill="#FFC0CB"/>
-    <circle cx="0" cy="-5" r="2" fill="#DC143C"/>
+  <!-- Airplane icon -->
+  <g transform="translate(30, 42)">
+    <!-- Fuselage -->
+    <ellipse cx="0" cy="0" rx="3.5" ry="12" fill="#8B5A2B"/>
+    
+    <!-- Cockpit circle -->
+    <circle cx="0" cy="-9" r="2.5" fill="#5A3F1A"/>
+    
+    <!-- Wings -->
+    <ellipse cx="0" cy="1" rx="14" ry="4" fill="#8B5A2B"/>
+    
+    <!-- Wing accent bars -->
+    <rect x="-15" y="0" width="2.5" height="2.5" fill="#FFD700" rx="0.5"/>
+    <rect x="12.5" y="0" width="2.5" height="2.5" fill="#FFD700" rx="0.5"/>
+    
+    <!-- Tail fin -->
+    <polygon points="0,8 -3,14 3,14" fill="#8B5A2B"/>
+    
+    <!-- Horizontal tail stabilizer -->
+    <ellipse cx="0" cy="8" rx="7" ry="2.5" fill="#8B5A2B" opacity="0.9"/>
   </g>
   
-  <!-- Main text: Bakers -->
-  <text x="50" y="45" class="script-text" font-size="42" fill="#8B4513">Bakers</text>
+  <!-- Brand text: doogle Aviator -->
+  <text x="70" y="52" class="brand-text" font-size="20" fill="#8B5A2B">doogle Aviator</text>
   
-  <!-- Den text -->
-  <text x="72" y="72" class="den-text" font-size="24" fill="#8B4513">DEN</text>
+  <!-- Club text -->
+  <text x="70" y="70" class="club-text" font-size="14" fill="#5A3F1A">CLUB</text>
   
-  <!-- Small cupcake icon right -->
-  <g transform="translate(195, 45)">
-    <path d="M -8,2 L -5,8 L 5,8 L 8,2 Z" fill="#A0522D"/>
-    <circle cx="-3" cy="0" r="3" fill="#FFC0CB"/>
-    <circle cx="3" cy="0" r="3" fill="#FFC0CB"/>
-    <circle cx="0" cy="-2" r="3" fill="#FFC0CB"/>
-    <circle cx="0" cy="-5" r="2" fill="#DC143C"/>
-  </g>
-  
-  <!-- Decorative underline -->
-  <path d="M 50 75 Q 110 78, 170 75" stroke="#FFD700" stroke-width="2" fill="none" opacity="0.7"/>
-  
-  <!-- Small decorative stars -->
-  <circle cx="48" cy="25" r="1.5" fill="#FFD700"/>
-  <circle cx="165" cy="28" r="1.5" fill="#FFD700"/>
-  <circle cx="180" cy="65" r="1.5" fill="#FFD700"/>
+  <!-- Decorative line accent -->
+  <line x1="65" y1="55" x2="220" y2="55" stroke="#FFD700" stroke-width="1" opacity="0.6"/>
 </svg>

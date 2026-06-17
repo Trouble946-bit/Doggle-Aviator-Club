@@ -61,7 +61,7 @@ body {
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #5A3F1A;
+  color: #000;
   text-decoration: none;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   display: flex;
@@ -73,7 +73,7 @@ body {
   font-family: Algerian, Georgia, serif;
   font-size: 2rem;
   font-weight: bold;
-  color: #8B5A2B;
+  color: #000;
   letter-spacing: 2px;
 }
 
@@ -94,7 +94,7 @@ body {
 }
 
 .nav-menu a {
-  color: #5A3F1A;
+  color: #000;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s;

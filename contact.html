@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Us - Doogle Aviation Club</title>
+  <title>Contact Us - doogle Aviator Club</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .form-buttons-group {
@@ -51,13 +51,13 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="Doogle Aviation Club Logo" class="logo-img">
-        <span class="brand-name">Doogle Aviation Club</span>
+        <img src="logo.png.png" alt="doogle Aviator Club Logo" class="logo-img">
+        <span class="brand-name">doogle Aviator Club</span>
       </a>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="cakes.html">Lodge</a></li>
-        <li><a href="baked-snacks.html">Bar & Grill</a></li>
+        <li><a href="baked-snacks.html">Bar & Restaurant</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -81,11 +81,11 @@
           </div>
           <div class="info-box">
             <h3>📞 Phone</h3>
-            <p>+265 882 909 864</p>
+            <p>+265999074169<br>+265994646696</p>
           </div>
           <div class="info-box">
             <h3>✉️ Email</h3>
-            <p>Email address is hidden for security. Please use the form below or WhatsApp.</p>
+            <p>reservations@dooglesmalawi.com</p>
           </div>
           <div class="info-box">
             <h3>🕐 Hours</h3>
@@ -134,7 +134,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Doggle Aviator Club. All rights reserved.</p>
+      <p>&copy; 2025 doogle Aviator Club. All rights reserved.</p>
       <p>Where comfort and great food come together.</p>
       <p style="margin-top: 1rem; opacity: 0.8;"><a href="admin.html" style="color: inherit; text-decoration: underline;">Owner Portal</a></p>
     </div>
@@ -186,8 +186,8 @@
           const data = getFormData();
           if (!validateForm(data)) return;
           
-          const phoneNumber = '265882909864';
-          let whatsappMessage = `*NEW REQUEST - Doogle Aviation Club*\n\n`;
+          const phoneNumber = '265999074169';
+          let whatsappMessage = `*NEW REQUEST - doogle Aviator Club*\n\n`;
           whatsappMessage += `*Customer:* ${data.name}\n`;
           whatsappMessage += `*Phone:* ${data.phone}\n`;
           if (data.email) whatsappMessage += `*Email:* ${data.email}\n`;
@@ -216,8 +216,8 @@
           emailBody += `Needed By: ${data.date}\n`;
           emailBody += `\nSpecial Requirements:\n${data.message || 'None'}`;
           
-          const recipientEmail = 'info@dooglesmalawi.com';
-          const subject = `New Request from ${data.name} - Doogle Aviation Club`;
+          const recipientEmail = 'reservations@dooglesmalawi.com';
+          const subject = `New Request from ${data.name} - doogle Aviator Club`;
           const encodedBody = encodeURIComponent(emailBody);
           const encodedSubject = encodeURIComponent(subject);
           

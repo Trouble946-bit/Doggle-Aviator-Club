@@ -54,6 +54,9 @@
         <img src="logo.png.png" alt="doogle Aviator Club Logo" class="logo-img">
         <span class="brand-name">doogle Aviator Club</span>
       </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="cakes.html">Lodge</a></li>
@@ -233,6 +236,18 @@
         tomorrow.setDate(tomorrow.getDate() + 1);
         const minDate = tomorrow.toISOString().split('T')[0];
         dateInput.setAttribute('min', minDate);
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const navContainer = document.querySelector('.nav-container');
+      if (toggle && navContainer) {
+        toggle.addEventListener('click', function() {
+          const isOpen = navContainer.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', isOpen);
+        });
       }
     });
   </script>

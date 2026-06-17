@@ -34,16 +34,25 @@ foreach ($file in $htmlFiles) {
     }
 
     $clean = $ref.Split('?')[0].Split('#')[0]
+    # Skip JS template placeholders and inline template variables (e.g. ${imageData})
+    if ($clean -match '\$\{') {
+      continue
+    }
     if ([string]::IsNullOrWhiteSpace($clean)) {
       continue
     }
 
     $resolvedPath = Join-Path $Root $clean
-    if (-not (Test-Path $resolvedPath)) {
-      $brokenReferences += [pscustomobject]@{
-        File = $file.Name
-        Reference = $ref
+    try {
+      if (-not (Test-Path $resolvedPath)) {
+        $brokenReferences += [pscustomobject]@{
+          File = $file.Name
+          Reference = $ref
+        }
       }
+    } catch {
+      # If Test-Path errors (illegal characters or unsupported formats), skip this reference
+      continue
     }
   }
 }

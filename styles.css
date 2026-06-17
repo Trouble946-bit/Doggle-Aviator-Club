@@ -627,6 +627,12 @@ h2 {
     height: 50px;
   }
 
+  /* Make hero shorter on mobile to avoid horizontal scaling */
+  .hero {
+    height: auto;
+    min-height: 300px;
+  }
+
   .hero-content h1 {
     font-size: 2.5rem;
   }
@@ -656,6 +662,101 @@ h2 {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  /* Make navigation responsive on small screens */
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  /* Avoid navbar overlapping content on small screens */
+  .navbar {
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .hero {
+    margin-top: 0.5rem;
+  }
+
+  /* Stack logo and nav vertically to avoid horizontal overflow */
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    text-shadow: none;
+    gap: 0.5rem;
+  }
+
+  .brand-name {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #000;
+    display: inline-block;
+    line-height: 1.05;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  .nav-container.open .nav-menu {
+    display: flex;
+  }
+
+  /* Hamburger button */
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-left: auto;
+  }
+
+  .nav-toggle .hamburger,
+  .nav-toggle .hamburger::before,
+  .nav-toggle .hamburger::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #000;
+    border-radius: 2px;
+  }
+
+  .nav-toggle .hamburger::before,
+  .nav-toggle .hamburger::after {
+    position: relative;
+  }
+
+  .nav-toggle .hamburger::before {
+    transform: translateY(-7px);
+  }
+
+  .nav-toggle .hamburger::after {
+    transform: translateY(5px);
   }
 
   .section-header {

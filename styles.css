@@ -153,23 +153,24 @@ body {
   margin-bottom: 2rem;
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .cta-button {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: #FFD700;
-  color: #ffffff;
+  background: white;
+  color: #5A3F1A;
   text-decoration: none;
   border-radius: 50px;
   font-weight: bold;
   font-size: 1.1rem;
   transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  border: 2px solid rgba(90,63,26,0.08);
+}
+.cta-button:hover {
+  background: #f7f5f0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 

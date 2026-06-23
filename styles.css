@@ -40,30 +40,31 @@ body {
 }
 
 /* Navigation */
-.navbar {
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
   background: white;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #000;
+  color: #5A3F1A;
   text-decoration: none;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.cta-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.cta-button.secondary {
+  background: white;
+  color: #5A3F1A;
+}
+.cta-button.secondary:hover {
+  background: #f0f0f0;
+}
   display: flex;
   align-items: center;
   gap: 1rem;

@@ -88,7 +88,10 @@
   <section class="hero">
     <div class="slideshow-bg">
       <div class="slide active">
-        <img src="Home.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">
+        <picture>
+          <source type="image/webp" srcset="assets/optimized/Home-1600.webp 1600w, assets/optimized/Home-800.webp 800w, assets/optimized/Home-480.webp 480w" sizes="100vw">
+          <img src="assets/optimized/Home-800.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">
+        </picture>
       </div>
       <div class="slide" style="background-image: url('Bar pool 5.jpeg');"></div>
       <div class="slide" style="background-image: url('lodge outside.jpeg');"></div>

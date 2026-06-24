@@ -1,0 +1,80 @@
+name: Optimize images and update markup
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install image tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick webp
+
+      - name: Create optimized images
+        run: |
+          set -e
+          mkdir -p assets/optimized
+          images=("Home.jpg" "logo.png.png" "site-bg-1920.jpg" "site-bg-1366.jpg" "site-bg-1024.jpg" "site-bg-768.jpg" "site-bg-480.jpg" "Bar Meal.jpeg" "Bar pool 5.jpeg" "Bar pool.jpeg" "lodge outside.jpeg")
+          for img in "${images[@]}"; do
+            if [ -f "$img" ]; then
+              base=$(basename "$img")
+              name="${base%.*}"
+              echo "Processing $img -> $name"
+              # WebP variants
+              convert "$img" -strip -quality 80 -resize 1600x1600\> "assets/optimized/${name}-1600.webp"
+              convert "$img" -strip -quality 80 -resize 800x800\> "assets/optimized/${name}-800.webp"
+              convert "$img" -strip -quality 80 -resize 480x480\> "assets/optimized/${name}-480.webp"
+              # Fallback JPEG variants
+              convert "$img" -strip -quality 75 -resize 1600x1600\> "assets/optimized/${name}-1600.jpg"
+              convert "$img" -strip -quality 75 -resize 800x800\> "assets/optimized/${name}-800.jpg"
+              convert "$img" -strip -quality 75 -resize 480x480\> "assets/optimized/${name}-480.jpg"
+            else
+              echo "Skipping $img (not found)"
+            fi
+          done
+
+      - name: Commit optimized images
+        run: |
+          git add assets/optimized || true
+          git commit -m "Add optimized images (webp/jpeg) [ci]" || echo "No optimized image changes"
+
+      - name: Update index.html hero to use <picture>
+        run: |
+          python3 - <<'PY'
+import re
+fn='index.html'
+with open(fn,'r',encoding='utf-8') as f:
+    s=f.read()
+old='<img src="Home.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">'
+new='''<picture>
+  <source type="image/webp" srcset="assets/optimized/Home-1600.webp 1600w, assets/optimized/Home-800.webp 800w, assets/optimized/Home-480.webp 480w" sizes="100vw">
+  <img src="assets/optimized/Home-800.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">
+</picture>'''
+if old in s:
+    s=s.replace(old,new)
+    with open(fn,'w',encoding='utf-8') as f:
+        f.write(s)
+    print('Updated index.html')
+else:
+    print('Did not find target img tag in index.html')
+PY
+          git add index.html || true
+          git commit -m "Use optimized Home image with <picture> [ci]" || echo "No index.html changes"
+
+      - name: Push changes
+        run: git push

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>doogle Aviator Club - Lodge & Restaurant</title>
   <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="preload" as="image" href="Home.jpg">
   <style>
     .hero {
       position: relative;
@@ -68,7 +69,9 @@
 
   <section class="hero">
     <div class="slideshow-bg">
-      <div class="slide active" style="background-image: url('Home.jpg');"></div>
+      <div class="slide active">
+        <img src="Home.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">
+      </div>
       <div class="slide" style="background-image: url('Bar pool 5.jpeg');"></div>
       <div class="slide" style="background-image: url('lodge outside.jpeg');"></div>
     </div>

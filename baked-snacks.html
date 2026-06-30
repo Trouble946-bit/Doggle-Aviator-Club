@@ -103,45 +103,25 @@
 
   <script>
     const menuGrid = document.getElementById('menu-grid');
-    const defaultBarMenu = [
-      { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop', alt: 'Classic Beef Burger' },
-      { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop', alt: 'Grilled Chicken Platter' },
-      { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop', alt: 'Ribeye Steak' },
-      { title: 'Club Sandwich', description: 'Triple-layer toasted sandwich with fries', price: 'MWK 12,500', image: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&h=400&fit=crop', alt: 'Club Sandwich' },
-      { title: 'Caesar Salad', description: 'Crisp greens, parmesan, croutons, and dressing', price: 'MWK 9,000', image: 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&h=400&fit=crop', alt: 'Caesar Salad' },
-      { title: 'Fish and Chips', description: 'Crispy battered fish with golden fries', price: 'MWK 17,000', image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=400&fit=crop', alt: 'Fish and Chips' },
-      { title: 'Pepperoni Pizza', description: 'Stone-baked pizza with rich tomato base', price: 'MWK 22,000', image: 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400&h=400&fit=crop', alt: 'Pepperoni Pizza' },
-      { title: 'BBQ Wings', description: 'Smoky glazed wings with ranch dip', price: 'MWK 13,000', image: 'https://images.unsplash.com/photo-1527169402691-a3fb4f8c0f54?w=400&h=400&fit=crop', alt: 'BBQ Wings' },
-      { title: 'Beef Tacos', description: 'Three loaded tacos with house salsa', price: 'MWK 11,500', image: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=400&h=400&fit=crop', alt: 'Beef Tacos' },
-      { title: 'Pasta Alfredo', description: 'Creamy pasta with grilled chicken strips', price: 'MWK 16,000', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&h=400&fit=crop', alt: 'Pasta Alfredo' },
-      { title: 'Mocktail Selection', description: 'Refreshing non-alcoholic signature blends', price: 'MWK 6,500', image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=400&fit=crop', alt: 'Mocktail Selection' },
-      { title: 'Chef Special Platter', description: 'Best of the grill for two people', price: 'MWK 34,000', image: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=400&fit=crop', alt: 'Chef Special Platter' }
+
+    const categories = [
+      { title: 'Main Dishes', description: 'Hearty main courses — burgers, steaks, pasta, and signature plates.' },
+      { title: 'Desserts', description: 'Sweet finales — cakes, pastries, and house-made desserts.' },
+      { title: 'BBQ and Grill', description: 'Smoky grilled specialties, platters, and barbecue favorites.' },
+      { title: 'Drinks', description: 'Cocktails, mocktails, beers, wines, and hot beverages.' }
     ];
 
-    function getMenuData() {
-      const raw = localStorage.getItem('doggleMenuData');
-      if (!raw) return defaultBarMenu;
-      try {
-        const data = JSON.parse(raw);
-        return data.bar && data.bar.length ? data.bar : defaultBarMenu;
-      } catch (error) {
-        return defaultBarMenu;
-      }
-    }
-
-    function renderMenu() {
-      const items = getMenuData();
-      menuGrid.innerHTML = items.map(item => `
-        <div class="picture-box">
-          <img src="${item.image || 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop'}" alt="${item.alt || item.title}" loading="lazy" />
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <a href="contact.html?item=${encodeURIComponent(item.title)}" class="order-btn">Order Now</a>
+    function renderCategories() {
+      menuGrid.innerHTML = categories.map(cat => `
+        <div class="picture-box category-box">
+          <h3>${cat.title}</h3>
+          <p>${cat.description}</p>
+          <a href="contact.html?category=${encodeURIComponent(cat.title)}" class="order-btn">View & Order</a>
         </div>
       `).join('');
     }
 
-    renderMenu();
+    renderCategories();
 
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');

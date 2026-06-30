@@ -416,6 +416,15 @@
             <label for="item-price">Price *</label>
             <input id="item-price" type="text" placeholder="e.g. MWK 14,000" required />
           </div>
+          <div class="form-group" id="category-select-group">
+            <label for="item-category">Category</label>
+            <select id="item-category">
+              <option value="main-dishes">Main Dishes</option>
+              <option value="desserts">Desserts</option>
+              <option value="bbq-grill">BBQ and Grill</option>
+              <option value="drinks">Drinks</option>
+            </select>
+          </div>
           <div class="image-upload-section">
             <p>Upload image from your device (or use archived image)</p>
             <input id="item-image-upload" type="file" accept="image/*" />
@@ -461,6 +470,7 @@
     const itemDescriptionInput = document.getElementById('item-description');
     const itemPriceInput = document.getElementById('item-price');
     const itemImageInput = document.getElementById('item-image');
+    const itemCategorySelect = document.getElementById('item-category');
     const itemImageUpload = document.getElementById('item-image-upload');
     const imagePreview = document.getElementById('image-preview');
     const archiveGallery = document.getElementById('archive-gallery');
@@ -476,9 +486,9 @@
 
     const defaultMenuData = {
       bar: [
-        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop' },
-        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop' },
-        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop' }
+        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=400&fit=crop', category: 'main-dishes' },
+        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=400&fit=crop', category: 'main-dishes' },
+        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop', category: 'bbq-grill' }
       ],
       lodge: [
         { title: '3 Bed Chalet', description: 'Private chalet with three beds and basic amenities', price: 'MWK 65,000 / night', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=400&fit=crop' },
@@ -625,6 +635,7 @@
       itemTitleInput.value = item.title;
       itemDescriptionInput.value = item.description;
       itemPriceInput.value = item.price;
+      if (itemCategorySelect) itemCategorySelect.value = item.category || 'main-dishes';
       itemImageInput.value = '';
       currentUploadedImage = null;
       if (item.image && (item.image.startsWith('data:') || item.image.startsWith('blob:'))) {
@@ -655,6 +666,7 @@
       const title = itemTitleInput.value.trim();
       const description = itemDescriptionInput.value.trim();
       const price = itemPriceInput.value.trim();
+      const category = itemCategorySelect ? itemCategorySelect.value : 'main-dishes';
       const urlImage = itemImageInput.value.trim();
 
       if (!title || !description || !price) {
@@ -674,7 +686,7 @@
         }
       }
 
-      const newItem = { title, description, price, image: finalImage };
+      const newItem = { title, description, price, image: finalImage, category };
 
       if (editingIndex !== null) {
         items[editingIndex] = newItem;

@@ -105,23 +105,67 @@
     const menuGrid = document.getElementById('menu-grid');
 
     const categories = [
-      { title: 'Main Dishes', description: 'Hearty main courses — burgers, steaks, pasta, and signature plates.' },
-      { title: 'Desserts', description: 'Sweet finales — cakes, pastries, and house-made desserts.' },
-      { title: 'BBQ and Grill', description: 'Smoky grilled specialties, platters, and barbecue favorites.' },
-      { title: 'Drinks', description: 'Cocktails, mocktails, beers, wines, and hot beverages.' }
+      { id: 'main-dishes', title: 'Main Dishes', description: 'Hearty main courses — burgers, steaks, pasta, and signature plates.' },
+      { id: 'desserts', title: 'Desserts', description: 'Sweet finales — cakes, pastries, and house-made desserts.' },
+      { id: 'bbq-grill', title: 'BBQ and Grill', description: 'Smoky grilled specialties, platters, and barbecue favorites.' },
+      { id: 'drinks', title: 'Drinks', description: 'Cocktails, mocktails, beers, wines, and hot beverages.' }
     ];
+
+    const sampleItems = {
+      'main-dishes': [
+        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000' },
+        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000' }
+      ],
+      'desserts': [
+        { title: 'Chocolate Cake', description: 'Rich chocolate layered cake', price: 'MWK 6,000' },
+        { title: 'Vanilla Cheesecake', description: 'Creamy cheesecake with berry compote', price: 'MWK 6,500' }
+      ],
+      'bbq-grill': [
+        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000' },
+        { title: 'BBQ Wings', description: 'Smoky glazed wings with ranch dip', price: 'MWK 13,000' }
+      ],
+      'drinks': [
+        { title: 'Mocktail Selection', description: 'Refreshing non-alcoholic signature blends', price: 'MWK 6,500' },
+        { title: 'House Red Wine (glass)', description: 'Selected pours', price: 'MWK 2,500' }
+      ]
+    };
 
     function renderCategories() {
       menuGrid.innerHTML = categories.map(cat => `
         <div class="picture-box category-box">
           <h3>${cat.title}</h3>
           <p>${cat.description}</p>
-          <a href="contact.html?category=${encodeURIComponent(cat.title)}" class="order-btn">View & Order</a>
+          <a href="#${cat.id}" class="order-btn">View & Order</a>
         </div>
       `).join('');
     }
 
+    function renderCategorySections() {
+      const container = document.querySelector('.container');
+      const sectionsHtml = categories.map(cat => `
+        <section id="${cat.id}" class="category-section">
+          <h2>${cat.title}</h2>
+          <p class="lead">${cat.description}</p>
+          <div class="items-grid">
+            ${ (sampleItems[cat.id] || []).map(it => `
+              <div class="item-card">
+                <h4>${it.title}</h4>
+                <p>${it.description}</p>
+                <p class="price">${it.price}</p>
+                <a href="contact.html?item=${encodeURIComponent(it.title)}" class="order-btn">Order</a>
+              </div>
+            `).join('') }
+          </div>
+        </section>
+      `).join('');
+
+      // Append sections after the picture grid
+      const menuGridEl = document.getElementById('menu-grid');
+      menuGridEl.insertAdjacentHTML('afterend', sectionsHtml);
+    }
+
     renderCategories();
+    renderCategorySections();
 
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');

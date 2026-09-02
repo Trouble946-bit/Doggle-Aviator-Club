@@ -47,6 +47,13 @@
       z-index: 1;
     }
   </style>
+  <style>
+    .items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+    .item-card { background: white; padding: 0.75rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: left; }
+    .item-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; display:block; margin-bottom:0.5rem; }
+    .picture-box.category-box { text-align: center; }
+    .picture-box.category-box .order-btn { display:none; }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -71,9 +78,9 @@
   </nav>
 
   <section class="page-header">
-    <div class="slideshow-bg">
-      <div class="slide active" style="background-image: url('Bar.jpeg');"></div>
-      <div class="slide" style="background-image: url('Bar Dining 1.jpeg');"></div>
+      <div class="slideshow-bg">
+      <div class="slide active" style="background-image: url('assets/optimized/Bar-Meal-1600.jpg');"></div>
+      <div class="slide" style="background-image: url('assets/optimized/Bar-pool-1600.jpg');"></div>
     </div>
     <div class="header-content">
       <h1>Bar & Restaurant</h1>
@@ -113,20 +120,22 @@
 
     const sampleItems = {
       'main-dishes': [
-        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', price: 'MWK 14,000' },
-        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', price: 'MWK 18,000' }
+        { title: 'Classic Beef Burger', description: 'Served with fries and house sauce', image: 'assets/optimized/burger-1600.jpg' },
+        { title: 'Grilled Chicken Platter', description: 'Marinated chicken with vegetables and chips', image: 'assets/optimized/grilled-chicken-1600.jpg' }
       ],
       'desserts': [
-        { title: 'Chocolate Cake', description: 'Rich chocolate layered cake', price: 'MWK 6,000' },
-        { title: 'Vanilla Cheesecake', description: 'Creamy cheesecake with berry compote', price: 'MWK 6,500' }
+        { title: 'Chocolate Cake', description: 'Rich chocolate layered cake', image: 'assets/optimized/chocolate-cake-1600.jpg' },
+        { title: 'Vanilla Cheesecake', description: 'Creamy cheesecake with berry compote', image: 'assets/optimized/vanilla-1600.jpg' }
       ],
       'bbq-grill': [
-        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', price: 'MWK 26,000' },
-        { title: 'BBQ Wings', description: 'Smoky glazed wings with ranch dip', price: 'MWK 13,000' }
+        { title: 'Ribeye Steak', description: 'Char-grilled steak with mashed potatoes', image: 'assets/optimized/steak-1600.jpg' },
+        { title: 'BBQ Wings', description: 'Smoky glazed wings with ranch dip', image: 'assets/optimized/wings-1600.jpg' }
       ],
       'drinks': [
-        { title: 'Mocktail Selection', description: 'Refreshing non-alcoholic signature blends', price: 'MWK 6,500' },
-        { title: 'House Red Wine (glass)', description: 'Selected pours', price: 'MWK 2,500' }
+        { title: 'Carlsberg Chill', description: 'Cold lager served chilled', image: 'assets/optimized/chill-1600.jpg' },
+        { title: ' Malawi Spirits', description: 'Smooth local brandy pour', image: 'assets/optimized/premier-brandy-1600.jpg' },
+        { title: 'Castel Cocktails', description: 'Signature Castel cocktails and mixes', image: 'assets/optimized/vodka-1600.jpg' },
+        { title: 'House Red Wine (glass)', description: 'Selected pours', image: 'assets/optimized/wine-1600.jpg' }
       ]
     };
 
@@ -140,15 +149,9 @@
     }
 
     function renderCategories() {
-      const icons = categories.reduce((map, c) => (map[c.id] = c.icon, map), {});
-      menuGrid.innerHTML = categories.map(cat => `
-        <div class="picture-box category-box">
-          <div class="category-icon">${cat.icon}</div>
-          <h3>${cat.title}</h3>
-          <p>${cat.description}</p>
-          <a href="#${cat.id}" class="order-btn">View & Order</a>
-        </div>
-      `).join('');
+      // Categories tiles removed per request — keep placeholder container hidden
+      menuGrid.innerHTML = '';
+      menuGrid.style.display = 'none';
     }
 
     function renderCategorySections() {
@@ -156,8 +159,13 @@
       const menuGridEl = document.getElementById('menu-grid');
       const sectionsHtml = categories.map(cat => {
         const storedItems = stored.filter(i => i.category === cat.id);
-        const fallback = sampleItems[cat.id] || [];
-        const items = storedItems.length ? storedItems : fallback;
+          const fallback = sampleItems[cat.id] || [];
+          // If there are stored items, try to reuse sample images by matching titles,
+          // otherwise fall back to the sample list.
+          const items = storedItems.length ? storedItems.map(si => {
+            const match = fallback.find(f => f.title && si.title && f.title.toLowerCase() === si.title.toLowerCase());
+            return Object.assign({}, si, { image: si.image || (match ? match.image : 'assets/optimized/placeholder-400.jpg') });
+          }) : fallback;
         return `
           <section id="${cat.id}" class="category-section">
             <h2>${cat.title}</h2>
@@ -165,10 +173,14 @@
             <div class="items-grid">
               ${ items.map(it => `
                 <div class="item-card">
+                  ${ it.image ? `
+                    <img 
+                      src="${ it.image }"
+                      srcset="${ (it.image && it.image.includes('-1600')) ? `${it.image.replace('-1600','-480')} 480w, ${it.image.replace('-1600','-800')} 800w, ${it.image} 1600w` : '' }"
+                      sizes="${ (it.image && it.image.includes('-1600')) ? '(max-width:600px) 480px, (max-width:1200px) 800px, 1600px' : '' }"
+                      alt="${it.title}" loading="lazy" />` : '' }
                   <h4>${it.title}</h4>
                   <p>${it.description}</p>
-                  <p class="price">${it.price || ''}</p>
-                  <a href="contact.html?item=${encodeURIComponent(it.title)}" class="order-btn">Order</a>
                 </div>
               `).join('') }
             </div>
@@ -180,6 +192,23 @@
 
     renderCategories();
     renderCategorySections();
+
+    (function ensureDrinkImages(){
+      const imgMap = {
+        'carlsberg chill': 'assets/optimized/beer-carlsberg-1600.jpg',
+        'premier brandy': 'assets/optimized/premier-brandy-1600.jpg'
+      };
+      document.querySelectorAll('.item-card').forEach(card=>{
+        const h4 = card.querySelector('h4');
+        const img = card.querySelector('img');
+        if(h4 && img){
+          const key = h4.textContent.trim().toLowerCase();
+          if(imgMap[key]){
+            img.src = imgMap[key] + '?v=' + Date.now();
+          }
+        }
+      });
+    })();
 
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');

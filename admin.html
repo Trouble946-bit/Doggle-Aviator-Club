@@ -381,24 +381,7 @@
       <p>Enter your password to manage menu items</p>
       <input id="admin-password" type="password" placeholder="Enter password" autocomplete="off" />
       <button id="login-button" type="button">Log In</button>
-      <p style="margin-top:0.75rem; opacity:0.85;"><a href="#" id="forgot-link" style="color: inherit; text-decoration: underline;">Forgot password?</a></p>
-
-      <div id="recovery-instructions" class="hidden" style="text-align:left; margin-top:1rem; background:#fff; padding:1rem; border-radius:8px; border:1px solid #e6d7c3;">
-        <h4 style="margin:0 0 0.5rem 0; color:#5A3F1A;">Password recovery</h4>
-        <p style="margin:0 0 0.5rem 0; color:#444;">If you've forgotten the portal password, you can recover or reset it using one of these methods:</p>
-        <ol style="margin:0 0 0.5rem 1rem; color:#444;">
-          <li>Edit the file <strong>admin.html</strong> and change the <code>const ADMIN_PASSWORD</code> value to a new temporary password (for advanced users).</li>
-          <li>From the browser console you can set a new password locally (this stores it in your browser only):
-            <pre style="background:#f4f0ea;padding:0.5rem;border-radius:6px;">localStorage.setItem('doggleAdminPassword', 'newpassword');</pre>
-          </li>
-          <li>To reset any locally stored custom password and revert to the built-in default, run:
-            <pre style="background:#f4f0ea;padding:0.5rem;border-radius:6px;">localStorage.removeItem('doggleAdminPassword');</pre>
-          </li>
-        </ol>
-        <div style="margin-top:0.5rem; display:flex; gap:0.5rem;">
-          <button id="reset-to-default" type="button" class="cancel-btn">Reset stored password</button>
-        </div>
-      </div>
+      <p style="margin-top:0.75rem; opacity:0.85;"><a href="mailto:reservations@dooglesmalawi.com?subject=Password%20reset%20request%20-%20Doogle%20Aviator%20Club&body=Please%20assist%20with%20resetting%20the%20owner%20portal%20password%20for%20the%20Doogle%20Aviator%20Club%20site." style="color: inherit; text-decoration: underline;">Recover via email</a></p>
     </div>
 
     <div id="editor-section" class="hidden">
@@ -529,9 +512,6 @@
     const currentPasswordInput = document.getElementById('current-password');
     const newPasswordInput = document.getElementById('new-password');
     const confirmPasswordInput = document.getElementById('confirm-password');
-    const forgotLink = document.getElementById('forgot-link');
-    const recoveryInstructions = document.getElementById('recovery-instructions');
-    const resetToDefaultBtn = document.getElementById('reset-to-default');
     const passwordSection = document.getElementById('password-section');
     const changePasswordTab = document.getElementById('change-password-tab');
 
@@ -795,17 +775,7 @@
       }
     });
 
-    forgotLink && forgotLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (recoveryInstructions) recoveryInstructions.classList.toggle('hidden');
-    });
-
-    resetToDefaultBtn && resetToDefaultBtn.addEventListener('click', () => {
-      if (!confirm('Remove stored custom password and revert to built-in default?')) return;
-      localStorage.removeItem(ADMIN_PASSWORD_KEY);
-      alert('Stored password removed. The portal now uses the built-in default.');
-      if (recoveryInstructions) recoveryInstructions.classList.add('hidden');
-    });
+    
 
     changePasswordTab && changePasswordTab.addEventListener('click', (e) => {
       e.preventDefault();

@@ -10,11 +10,26 @@
   <style>
     /* Critical CSS: navbar and hero (inlined for faster first render) */
     .navbar{background:#fff;padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
-    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;position:relative}
     .logo{font-size:1.8rem;font-weight:bold;color:#000;display:flex;align-items:center;gap:1rem;text-decoration:none}
     .brand-name{font-family:Algerian,Georgia,serif;font-size:2rem;font-weight:bold;color:#000;letter-spacing:2px}
     .nav-menu{display:flex;gap:2rem;list-style:none}
     .nav-menu a{color:#000;text-decoration:none;font-weight:600;padding:0.5rem 1rem;border-radius:5px}
+    .nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:0.5rem;border-radius:8px}
+    .nav-toggle .hamburger{width:22px;height:2px;background:#333;display:block;position:relative}
+    .nav-toggle .hamburger::before,.nav-toggle .hamburger::after{content:'';position:absolute;left:0;width:22px;height:2px;background:#333}
+    .nav-toggle .hamburger::before{top:-6px}
+    .nav-toggle .hamburger::after{top:6px}
+
+    /* Mobile: hide nav links and show hamburger */
+    @media (max-width: 800px) {
+      .nav-menu{display:none;}
+      .nav-toggle{display:block}
+      .brand-name{font-size:1.2rem}
+      .nav-container.open .nav-menu{display:flex;flex-direction:column;align-items:flex-end;position:absolute;right:1rem;top:64px;background:white;padding:0.5rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.15);min-width:160px}
+      .nav-container.open .nav-menu li{width:100%}
+      .nav-container.open .nav-menu a{display:block;padding:0.75rem 1rem;color:#111}
+    }
     .hero{height:600px;position:relative;display:flex;align-items:center;justify-content:center}
     .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5)}
     .hero-content{position:relative;z-index:1;text-align:center;color:white;max-width:800px;padding:2rem}

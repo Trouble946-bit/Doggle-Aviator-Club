@@ -381,6 +381,24 @@
       <p>Enter your password to manage menu items</p>
       <input id="admin-password" type="password" placeholder="Enter password" autocomplete="off" />
       <button id="login-button" type="button">Log In</button>
+      <p style="margin-top:0.75rem; opacity:0.85;"><a href="#" id="forgot-link" style="color: inherit; text-decoration: underline;">Forgot password?</a></p>
+
+      <div id="recovery-instructions" class="hidden" style="text-align:left; margin-top:1rem; background:#fff; padding:1rem; border-radius:8px; border:1px solid #e6d7c3;">
+        <h4 style="margin:0 0 0.5rem 0; color:#5A3F1A;">Password recovery</h4>
+        <p style="margin:0 0 0.5rem 0; color:#444;">If you've forgotten the portal password, you can recover or reset it using one of these methods:</p>
+        <ol style="margin:0 0 0.5rem 1rem; color:#444;">
+          <li>Edit the file <strong>admin.html</strong> and change the <code>const ADMIN_PASSWORD</code> value to a new temporary password (for advanced users).</li>
+          <li>From the browser console you can set a new password locally (this stores it in your browser only):
+            <pre style="background:#f4f0ea;padding:0.5rem;border-radius:6px;">localStorage.setItem('doggleAdminPassword', 'newpassword');</pre>
+          </li>
+          <li>To reset any locally stored custom password and revert to the built-in default, run:
+            <pre style="background:#f4f0ea;padding:0.5rem;border-radius:6px;">localStorage.removeItem('doggleAdminPassword');</pre>
+          </li>
+        </ol>
+        <div style="margin-top:0.5rem; display:flex; gap:0.5rem;">
+          <button id="reset-to-default" type="button" class="cancel-btn">Reset stored password</button>
+        </div>
+      </div>
     </div>
 
     <div id="editor-section" class="hidden">
@@ -397,7 +415,7 @@
         <button id="export-menu-btn" type="button">Export JSON</button>
       </div>
 
-      <div class="security-note">
+      <div class="security-note"> 
         Menu changes are saved in your browser. Make sure to use the same device and browser to view your changes on the public site.
       </div>
 
@@ -448,15 +466,42 @@
         </div>
       </div>
 
-      <div class="menu-gallery" id="menu-gallery"></div>
+        <p style="margin-top:1rem;"><a href="#" id="change-password-tab" style="color: inherit; text-decoration: underline;">Change Portal Password</a></p>
+
+        <div class="form-section hidden" id="password-section">
+          <h3>Change Portal Password</h3>
+          <div class="form-group">
+            <label for="current-password">Current password</label>
+            <input id="current-password" type="password" placeholder="Current password" />
+          </div>
+          <div class="form-group">
+            <label for="new-password">New password</label>
+            <input id="new-password" type="password" placeholder="New password" />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm new password</label>
+            <input id="confirm-password" type="password" placeholder="Confirm new password" />
+          </div>
+          <div class="form-buttons">
+            <button id="change-password-btn" type="button" class="save-btn">Change Password</button>
+          </div>
+        </div>
+
+        <div class="menu-gallery" id="menu-gallery"></div>
     </div>
   </div>
 
   <script>
-    const ADMIN_PASSWORD = 'DOGGLEOWNER';
+    const ADMIN_PASSWORD = 'admin';
+    const ADMIN_PASSWORD_KEY = 'doggleAdminPassword';
     const storageKey = 'doggleMenuData';
     const archiveKey = 'doggleImageArchive';
-    
+
+    function getAdminPassword() {
+      const stored = localStorage.getItem(ADMIN_PASSWORD_KEY);
+      return stored ? stored : ADMIN_PASSWORD;
+    }
+
     const loginSection = document.getElementById('login-section');
     const editorSection = document.getElementById('editor-section');
     const loginButton = document.getElementById('login-button');
@@ -479,6 +524,16 @@
     const addItemBtn = document.getElementById('add-item-btn');
     const resetMenuBtn = document.getElementById('reset-menu-btn');
     const exportMenuBtn = document.getElementById('export-menu-btn');
+
+    const changePasswordBtn = document.getElementById('change-password-btn');
+    const currentPasswordInput = document.getElementById('current-password');
+    const newPasswordInput = document.getElementById('new-password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const forgotLink = document.getElementById('forgot-link');
+    const recoveryInstructions = document.getElementById('recovery-instructions');
+    const resetToDefaultBtn = document.getElementById('reset-to-default');
+    const passwordSection = document.getElementById('password-section');
+    const changePasswordTab = document.getElementById('change-password-tab');
 
     let currentMenuType = 'bar';
     let editingIndex = null;
@@ -732,12 +787,50 @@
     }
 
     loginButton.addEventListener('click', () => {
-      if (passwordInput.value === ADMIN_PASSWORD) {
+      if (passwordInput.value === getAdminPassword()) {
         showEditor();
       } else {
         alert('Incorrect password.');
         passwordInput.value = '';
       }
+    });
+
+    forgotLink && forgotLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (recoveryInstructions) recoveryInstructions.classList.toggle('hidden');
+    });
+
+    resetToDefaultBtn && resetToDefaultBtn.addEventListener('click', () => {
+      if (!confirm('Remove stored custom password and revert to built-in default?')) return;
+      localStorage.removeItem(ADMIN_PASSWORD_KEY);
+      alert('Stored password removed. The portal now uses the built-in default.');
+      if (recoveryInstructions) recoveryInstructions.classList.add('hidden');
+    });
+
+    changePasswordTab && changePasswordTab.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!passwordSection) return;
+      passwordSection.classList.toggle('hidden');
+      passwordSection.scrollIntoView({ behavior: 'smooth' });
+      currentPasswordInput && currentPasswordInput.focus();
+    });
+
+    changePasswordBtn && changePasswordBtn.addEventListener('click', () => {
+      const current = currentPasswordInput.value || '';
+      const a = getAdminPassword();
+      if (current !== a) {
+        alert('Current password is incorrect.');
+        return;
+      }
+      const n = newPasswordInput.value || '';
+      const c = confirmPasswordInput.value || '';
+      if (!n) { alert('Please enter a new password.'); return; }
+      if (n !== c) { alert('New password and confirmation do not match.'); return; }
+      localStorage.setItem(ADMIN_PASSWORD_KEY, n);
+      currentPasswordInput.value = '';
+      newPasswordInput.value = '';
+      confirmPasswordInput.value = '';
+      alert('Password changed and saved locally. Use your new password on next login.');
     });
 
     passwordInput.addEventListener('keypress', (e) => {

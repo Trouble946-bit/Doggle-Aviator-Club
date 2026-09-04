@@ -7,79 +7,7 @@
   <link rel="preload" href="styles.css?v=3" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="styles.css?v=3"></noscript>
   <link rel="preload" as="image" href="Home.jpg">
-  <style>
-    /* Critical CSS: navbar and hero (inlined for faster first render) */
-    .navbar{background:#fff;padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
-    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;position:relative}
-    .logo{font-size:1.8rem;font-weight:bold;color:#000;display:flex;align-items:center;gap:1rem;text-decoration:none}
-    .brand-name{font-family:Algerian,Georgia,serif;font-size:2rem;font-weight:bold;color:#000;letter-spacing:2px}
-    .nav-menu{display:flex;gap:2rem;list-style:none}
-    .nav-menu a{color:#000;text-decoration:none;font-weight:600;padding:0.5rem 1rem;border-radius:5px}
-    .nav-toggle{display:none;background:transparent;border:none;cursor:pointer;padding:0.5rem;border-radius:8px}
-    .nav-toggle .hamburger{width:22px;height:2px;background:#333;display:block;position:relative}
-    .nav-toggle .hamburger::before,.nav-toggle .hamburger::after{content:'';position:absolute;left:0;width:22px;height:2px;background:#333}
-    .nav-toggle .hamburger::before{top:-6px}
-    .nav-toggle .hamburger::after{top:6px}
-
-    /* Mobile: hide nav links and show hamburger */
-    @media (max-width: 800px) {
-      .nav-menu{display:none;}
-      .nav-toggle{display:block}
-      .brand-name{font-size:1.2rem}
-      .nav-container.open .nav-menu{display:flex;flex-direction:column;align-items:flex-end;position:absolute;right:1rem;top:64px;background:white;padding:0.5rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.15);min-width:160px}
-      .nav-container.open .nav-menu li{width:100%}
-      .nav-container.open .nav-menu a{display:block;padding:0.75rem 1rem;color:#111}
-    }
-    .hero{height:600px;position:relative;display:flex;align-items:center;justify-content:center}
-    .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5)}
-    .hero-content{position:relative;z-index:1;text-align:center;color:white;max-width:800px;padding:2rem}
-    .hero-content h1{font-size:3.5rem;margin-bottom:0.5rem;text-shadow:2px 2px 8px rgba(0,0,0,0.5)}
-    .hero-content h2{font-size:2rem;margin-bottom:1rem;font-weight:400;color:#ffffff}
-    .hero-content p{font-size:1.3rem;margin-bottom:2rem}
-    .cta-button{display:inline-block;padding:1rem 2.5rem;background:white;color:#5A3F1A;text-decoration:none;border-radius:50px;font-weight:bold;font-size:1.1rem}
-    .slide img.slide-img{width:100%;height:100%;object-fit:cover;display:block}
-  </style>
-  <style>
-    .hero {
-      position: relative;
-      overflow: hidden;
-    }
-    .slideshow-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      background-size: cover;
-      background-position: center;
-    }
-    .slide.active {
-      opacity: 1;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-  </style>
+  <!-- Critical styles moved to styles.css for reuse across pages -->
 </head>
 <body>
   <nav class="navbar">
@@ -104,15 +32,15 @@
   </nav>
 
   <section class="hero">
-    <div class="slideshow-bg">
+      <div class="slideshow-bg">
       <div class="slide active">
         <picture>
           <source type="image/webp" srcset="assets/optimized/Home-1600.webp 1600w, assets/optimized/Home-800.webp 800w, assets/optimized/Home-480.webp 480w" sizes="100vw">
           <img src="assets/optimized/Home-800.jpg" alt="" class="slide-img" fetchpriority="high" loading="eager" width="1600" height="600">
         </picture>
       </div>
-      <div class="slide" style="background-image: url('Bar pool 5.jpeg');"></div>
-      <div class="slide" style="background-image: url('lodge outside.jpeg');"></div>
+      <div class="slide bg-2"></div>
+      <div class="slide bg-3"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -197,7 +125,7 @@
     <div class="container">
       <p>&copy; 2025 doogle Aviator Club. All rights reserved.</p>
       <p>Where comfort and great food come together.</p>
-      <p style="margin-top: 1rem; opacity: 0.8;"><a href="admin.html" style="color: inherit; text-decoration: underline;">Owner Portal</a></p>
+      <p class="owner-portal"><a href="admin.html">Owner Portal</a></p>
     </div>
   </footer>
 
@@ -214,17 +142,6 @@
     
     setInterval(nextSlide, 4000); // Change slide every 4 seconds
   </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggle = document.querySelector('.nav-toggle');
-      const navContainer = document.querySelector('.nav-container');
-      if (toggle && navContainer) {
-        toggle.addEventListener('click', function() {
-          const isOpen = navContainer.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', isOpen);
-        });
-      }
-    });
-  </script>
+  <script src="scripts/nav.js" defer></script>
 </body>
 </html>

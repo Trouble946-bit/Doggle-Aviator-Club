@@ -6,54 +6,7 @@
   <title>Bar & Restaurant - doogle Aviator Club</title>
   <link rel="preload" href="styles.css?v=3" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="styles.css?v=3"></noscript>
-  <style>
-    .page-header {
-      position: relative;
-      overflow: hidden;
-    }
-    .slideshow-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      background-size: cover;
-      background-position: center;
-    }
-    .slide.active {
-      opacity: 1;
-    }
-    .slide::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .header-content {
-      position: relative;
-      z-index: 1;
-    }
-  </style>
-  <style>
-    .items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
-    .item-card { background: white; padding: 0.75rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: left; }
-    .item-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; display:block; margin-bottom:0.5rem; }
-    .picture-box.category-box { text-align: center; }
-    .picture-box.category-box .order-btn { display:none; }
-  </style>
+  <!-- Page-specific styles moved to styles.css -->
 </head>
 <body>
   <nav class="navbar">
@@ -79,8 +32,8 @@
 
   <section class="page-header">
       <div class="slideshow-bg">
-      <div class="slide active" style="background-image: url('assets/optimized/Bar-Meal-1600.jpg');"></div>
-      <div class="slide" style="background-image: url('assets/optimized/Bar-pool-1600.jpg');"></div>
+      <div class="slide active bg-1"></div>
+      <div class="slide bg-2"></div>
     </div>
     <div class="header-content">
       <h1>Bar & Restaurant</h1>
@@ -104,7 +57,7 @@
     <div class="container">
       <p>&copy; 2025 doogle Aviator Club. All rights reserved.</p>
       <p>Where comfort and great food come together.</p>
-      <p style="margin-top: 1rem; opacity: 0.8;"><a href="admin.html" style="color: inherit; text-decoration: underline;">Owner Portal</a></p>
+      <p class="owner-portal"><a href="admin.html">Owner Portal</a></p>
     </div>
   </footer>
 
@@ -219,17 +172,6 @@
     }
     setInterval(nextSlide, 4000);
   </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggle = document.querySelector('.nav-toggle');
-      const navContainer = document.querySelector('.nav-container');
-      if (toggle && navContainer) {
-        toggle.addEventListener('click', function() {
-          const isOpen = navContainer.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', isOpen);
-        });
-      }
-    });
-  </script>
+  <script src="scripts/nav.js" defer></script>
 </body>
 </html>
